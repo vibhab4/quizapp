@@ -64,6 +64,20 @@ pip install flask flask-sqlalchemy
 - **Get a User's Quizzes**  
   `GET /user/{user_id}/quizzes`
 
+- **Get a Quiz with its Questions**  
+  `GET /quiz/{quiz_id}`
+
+- **Update a Quiz Title**  
+  `PUT /quizzes/{quiz_id}`
+  ```json
+  {
+    "title": "Updated Quiz Title"
+  }
+  ```
+
+- **Delete a Quiz**  
+  `DELETE /quiz/{quiz_id}`
+
 ### Questions
 - **Add a Question to a Quiz**  
   `POST /quiz/{quiz_id}/question`
