@@ -14,34 +14,17 @@ This is a simple Quiz API built using Flask and SQLAlchemy, allowing users to cr
 ### Prerequisites
 - Python 3.x
 - Flask
-- Flask-SQLAlchemy
+- Flask-SQLAlchemy (manages the database which is SQLite in this case)
 
-### Setup
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/quiz-api.git
-   cd quiz-api
-   ```
-2. Create a virtual environment (optional but recommended):
-   ```sh
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
 
 ## Running the API
 1. Initialize the database:
    ```sh
    python quiz.py
    ```
-2. Run the server:
-   ```sh
-   flask run
-   ```
    The API will be available at `http://127.0.0.1:5000/`.
+
+   In this project, I used Postman for the API requests.
 
 ## API Endpoints
 
