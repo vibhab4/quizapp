@@ -107,9 +107,3 @@ This is a simple Quiz API built using Flask and SQLAlchemy, allowing users to cr
   { "message": "Database reset successful!" }
   ```
 
-## License
-This project is open-source and available under the MIT License.
-
----
-Feel free to contribute or report issues in the repository!
-
