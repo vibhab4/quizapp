@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Initialize Flask app
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db' # Using SQLite database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
-    quizzes = db.relationship('Quiz', backref='creator', lazy=True)  # Relationship
+    quizzes = db.relationship('Quiz', backref='creator', lazy=True)  # Links user to quizzes
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,10 +29,10 @@ class Question(db.Model):
     correct_answer = db.Column(db.String(200), nullable=False)  # Correct answer cannot be NULL
 
 # API Routes
-
+# Home Page for the HTML Front-end (not fully implemented)
 @app.route('/')
 def home():
-    return "Welcome to the Quiz API!"
+    return "Welcome to the Quiz API!" 
 
 # Create a user
 @app.route('/user', methods=['POST'])
@@ -184,9 +184,9 @@ def reset_db():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/')
-def serve_index():
-    return send_from_directory('.', 'index.html')
+# @app.route('/')
+# def serve_index():
+#     return send_from_directory('.', 'index.html') # Frontend using HTML for the API 
 
 # Run the app
 if __name__ == '__main__':
