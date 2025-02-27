@@ -15,95 +15,94 @@ This is a simple Quiz API built using Flask and SQLAlchemy, allowing users to cr
 - Python 3.x
 - Flask
 - Flask-SQLAlchemy (manages the database which is SQLite in this case)
+- SQLite (for local storage)
+- Postman (for API testing)
 
+## Setup Instructions
+
+### Prerequisites
+- Install Python (>=3.8)
+- Install Flask and dependencies
+
+```bash
+pip install flask flask-sqlalchemy
+```
 
 ## Running the API
-1. Initialize the database:
+1. Run the Flask app:
    ```sh
    python quiz.py
    ```
    The API will be available at `http://127.0.0.1:5000/`.
 
-   In this project, I used Postman for the API requests.
-
 ## API Endpoints
 
-### User Management
-#### Create a User
-- **Endpoint:** `POST /user`
-- **Request Body:**
+### Users
+- **Create a User**  
+  `POST /user`
   ```json
-  { "name": "John Doe" }
-  ```
-- **Response:**
-  ```json
-  { "id": 1, "name": "John Doe" }
+  {
+    "name": "Vibha"
+  }
   ```
 
-#### Get All Users
-- **Endpoint:** `GET /users`
-- **Response:**
+- **Get All Users**  
+  `GET /users`
+
+### Quizzes
+- **Create a Quiz**  
+  `POST /quiz`
   ```json
-  [ { "id": 1, "name": "John Doe" } ]
+  {
+    "title": "Cloud Computing Quiz",
+    "user_id": 1
+  }
   ```
 
-### Quiz Management
-#### Create a Quiz
-- **Endpoint:** `POST /quiz`
-- **Request Body:**
+- **Get All Quizzes**  
+  `GET /quizzes`
+
+- **Get a User's Quizzes**  
+  `GET /user/{user_id}/quizzes`
+
+### Questions
+- **Add a Question to a Quiz**  
+  `POST /quiz/{quiz_id}/question`
   ```json
-  { "title": "Python Quiz", "user_id": 1 }
-  ```
-- **Response:**
-  ```json
-  { "id": 1, "title": "Python Quiz", "user_id": 1 }
+  {
+    "text": "What is not a programming language?",
+    "options": ["C", "C++", "Python", "Snake"],
+    "correct_answer": "Snake"
+  }
   ```
 
-#### Get All Quizzes
-- **Endpoint:** `GET /quizzes`
-- **Response:**
+- **Get All Questions in a Quiz**  
+  `GET /quizzes/{quiz_id}/questions`
+
+### Quiz Attempts
+- **Attempt a Quiz**  
+  `POST /quiz/{quiz_id}/attempt`
   ```json
-  [ { "id": 1, "title": "Python Quiz", "user_id": 1 } ]
+  {
+    "answers": {"1": "Snake", "2": "Python"}
+  }
   ```
 
-#### Get a Specific Quiz with Questions
-- **Endpoint:** `GET /quiz/{quiz_id}`
-- **Response:**
-  ```json
-  { "id": 1, "title": "Python Quiz", "user_id": 1, "questions": [] }
-  ```
+### Database Management
+- **Reset the Database**  
+  `POST /reset-db`
 
-### Question Management
-#### Add a Question to a Quiz
-- **Endpoint:** `POST /quiz/{quiz_id}/question`
-- **Request Body:**
-  ```json
-  { "text": "What is Python?", "options": ["A Snake", "A Programming Language"], "correct_answer": "A Programming Language" }
-  ```
-- **Response:**
-  ```json
-  { "id": 1, "text": "What is Python?", "options": ["A Snake", "A Programming Language"], "correct_answer": "A Programming Language" }
-  ```
+## Testing with Postman
 
-#### Get All Questions in a Quiz
-- **Endpoint:** `GET /quizzes/{quiz_id}/questions`
+This API was tested using **Postman**. To test it yourself:
+1. Open **Postman**.
+2. Click **Import**, then select **Raw text**.
+3. Paste the following URL and import it:
+   ```
+   http://127.0.0.1:5000/
+   ```
+4. Run the requests and check the responses.
 
-### Attempting a Quiz
-#### Submit Answers
-- **Endpoint:** `POST /quiz/{quiz_id}/attempt`
-- **Request Body:**
-  ```json
-  { "answers": { "1": "A Programming Language" } }
-  ```
-- **Response:**
-  ```json
-  { "score": 1, "total": 1 }
-  ```
+Alternatively, you can manually create the requests in Postman using the endpoint details provided above.
 
-## Reset Database
-- **Endpoint:** `POST /reset-db`
-- **Response:**
-  ```json
-  { "message": "Database reset successful!" }
-  ```
 
