@@ -1,5 +1,4 @@
-# quizapp
-Quiz App API
+# Quiz App API
 
 This is a simple Quiz API built using Flask and SQLAlchemy, allowing users to create quizzes, add questions, and attempt quizzes.
 
