@@ -4,7 +4,7 @@ This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows u
 
 # Quiz App Demo
 
-Watch the demo video: [Watch the Demo Video](https://drive.google.com/file/d/1HCWTr1JqWzo4RI_jG_yqYqdHfflzuNNL/view?usp=sharing)
+[Watch the Demo Video](https://drive.google.com/file/d/1HCWTr1JqWzo4RI_jG_yqYqdHfflzuNNL/view?usp=sharing)
 
 
 ## Features
