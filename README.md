@@ -2,8 +2,6 @@
 
 This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows users to register, log in, create quizzes, add questions, attempt quizzes, and view their scores. The app also supports public and private quizzes, user authentication, and more.
 
----
-
 ## Features
 - **User Authentication**:
   - Register new users.
@@ -12,7 +10,7 @@ This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows u
 
 - **Quiz Management**:
   - Create quizzes (public or private).
-  - Add questions to quizzes.
+  - Add questions to quizzes (can be done by access to API keys)
   - Retrieve quizzes and questions.
   - Attempt quizzes and receive a score.
 
@@ -26,7 +24,6 @@ This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows u
 - **Database Management**:
   - Reset the database to its initial state.
 
----
 
 ## Installation
 
@@ -56,7 +53,6 @@ This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows u
 
    The API will be available at `http://127.0.0.1:5000/`.
 
----
 
 ## API Endpoints
 
