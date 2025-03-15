@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Quiz App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quiz App</h1>
+        </header>
+        <main>
+            <div class="card">
+                <h2>Create Account</h2>
+                <div id="error-message" class="error-message"></div>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn primary">Register</button>
+                    </div>
+                    <p class="text-center">
+                        Already have an account? <a href="/login">Login</a>
+                    </p>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; Vibha's Quiz App</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                document.getElementById('error-message').textContent = 
+                    'Passwords do not match';
+                return;
+            }
+            
+            fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Registration failed');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Store API key in localStorage
+                localStorage.setItem('api_key', data.api_key);
+                localStorage.setItem('username', data.name);
+                
+                // Redirect to dashboard
+                window.location.href = '/dashboard';
+            })
+            .catch(error => {
+                document.getElementById('error-message').textContent = error.message;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Quiz App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>  </h1>
+            
+        </header>
+        <main>
+            <!-- Welcome Message -->
+            <div class="dashboard-header">
+                <h2>Welcome, <span id="username">User</span>!</h2>
+                <!-- Logout Button -->
+                
+            </div>
+
+            <!-- Quiz List -->
+            <div class="card">
+                <h3>My Quizzes</h3>
+                
+                <div id="public-quizzes">
+                    <p>Loading public quizzes...</p>
+                </div>
+            </div>
+
+            <div class="logout-container">
+                <a href="#" id="logout-btn" class="logout-btn">Logout</a>
+            </div>
+        </main>
+        
+        <footer>
+            
+            <p>&copy; Vibha's Quiz App</p>
+        </footer>
+
+
+    </div>
+
+    <script>
+        // Display username
+        document.getElementById('username').textContent = localStorage.getItem('username') || 'User';
+        
+        // Get API key from localStorage
+        const apiKey = localStorage.getItem('api_key');
+        
+        // Handle logout
+        document.getElementById('logout-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'API-Key': apiKey
+                }
+            })
+            .then(() => {
+                localStorage.removeItem('api_key');
+                localStorage.removeItem('username');
+                window.location.href = '/';
+            });
+        });
+        
+        // Fetch public quizzes
+        fetch('/api/public-quizzes')
+        .then(response => response.json())
+        .then(quizzes => {
+            const quizzesContainer = document.getElementById('public-quizzes');
+            
+            if (quizzes.length === 0) {
+                quizzesContainer.innerHTML = '<p>No public quizzes available.</p>';
+                return;
+            }
+            
+            quizzesContainer.innerHTML = '<div class="quiz-list"></div>';
+            const quizList = quizzesContainer.querySelector('div');
+            
+            quizzes.forEach(quiz => {
+                const quizItem = document.createElement('div');
+                quizItem.classList.add('quiz-item'); // Ensure styling remains consistent
+                quizItem.innerHTML = `
+                    <div class="quiz-header">
+                        <h4 class="quiz-title">${quiz.title}</h4>
+                    </div>
+                    <div class="quiz-actions">
+                        <a href="/take-quiz/${quiz.id}" class="btn small">Take Quiz</a>
+                    </div>
+                `;
+                quizList.appendChild(quizItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('public-quizzes').innerHTML = 
+                '<p>Error loading public quizzes. Please try again later.</p>';
+        });
+    </script>
+</body>
+</html>
