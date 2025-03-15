@@ -1,0 +1,408 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(rgba(250, 213, 0, 0.8), rgba(81, 162, 219, 0.8));  /* Gradient background */
+    line-height: 1.6; /* Increase line height for better readability */
+    height: 100vh; /* Ensure the gradient covers the entire viewport */
+}
+.logout-container {
+    text-align: center; /* Center the logout button */
+    margin-top: 30px; /* Add space between the card and the logout button */
+    margin-bottom: 20px; /* Add space between the logout button and the footer */
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #333333; /* Dark gray text color */
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px; /* Add space below the heading */
+    font-size: 24px; /* Increase font size */
+}
+
+p {
+    margin-bottom: 20px; /* Add space below the paragraph */
+    font-size: 16px; /* Set font size */
+    color: #1d0c0c; /* Medium gray text color */
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block;
+    text-align: center;
+}
+
+.btn.primary {
+    background-color: #16556a;
+    color: #fff;
+    align-self: center;
+}
+
+.btn.secondary {
+    background-color: #16556a;
+    color: #fff;
+}
+
+/* Animation for the welcome message */
+.dashboard-header h2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out 0.5s forwards; /* 0.5s delay */
+}
+
+/* Keyframes for the fade-in and slide-up animation */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-10px); /* Bounce effect */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    background-color: #117697;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #176999;
+}
+
+/* Card Styles */
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    
+    max-width: 100%; /* Limit the width of the card */
+    flex: 1;
+}
+
+/* Flex Container */
+.flex-container {
+    display: flex; /* Use Flexbox */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Add space between the card and image */
+    margin-top: 20px; /* Add some margin at the top */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+/* Image Container */
+aside {
+    flex: 1; /* Allow the image container to grow and take available space */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    max-width: 50%; /* Limit the image container to half the width */
+}
+
+.quiz-image {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px; /* Adds spacing between form elements */
+    text-align: center; /* Align labels and inputs to the left */
+}
+
+.form-group label {
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.form-para {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 27px;
+}
+
+.form-para svg {
+    border: none;
+    margin-right: 20px;
+    padding: 5px;
+    fill: #8e8e8e;
+}
+
+.form-para input {
+    border: none;
+    border-bottom: 1px solid #8e8e8e;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+.form-para input::placeholder {
+    color: #a0a0a0;
+}
+
+.form-para p {
+    color: #000000;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.form-para span {
+    margin-left: 15px;
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Quiz Item Styles */
+.quiz-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.quiz-header {
+    display: flex; /* Use Flexbox */
+        justify-content: space-between; /* Space out the title and button */
+        align-items: center;
+    width: 100%;
+
+}
+
+.quiz-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.quiz-actions {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.btn.small {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #1c5f76;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center; /* Center the footer text */
+    margin-top: 20px; /* Add some margin at the top */
+    padding: 10px; /* Add padding */ 
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Login Page Styles */
+.login-main {
+    display: flex;
+    justify-content: space-between; /* Space out the login form and image */
+    align-items: center; /* Vertically center the content */
+    background-color: transparent; /* Make the container transparent */
+    height: 100vh; /* Full viewport height */
+    padding: 0; /* Remove padding to ensure full width */
+    overflow: hidden;
+    /* opacity: 0.8; */
+}
+
+.login-img {
+    width: 50%; /* Image takes up half the width */
+    height: 100vh; /* Full viewport height */
+    object-fit: contain; /* Ensure the image fits within the container without distortion */
+    border-radius: 0 10px 10px 0; /* Rounded corners on the right side */
+    opacity: 0.9; 
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: Add a semi-transparent background to the image container */
+    padding: 20px;
+    border:none;
+    margin: 0;
+}
+
+.login-form {
+    width: 50%; /* Login form takes up half the width */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    opacity: 0.8; 
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    border-radius: 10px 0 0 10px; /* Rounded corners on the left side */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    padding: 20px; /* Add padding inside the form */
+    border: none;
+    margin: 0;
+}
+
+.login-intro {
+    margin-bottom: 50px;
+    margin-left: 7px;
+    color: #000000;
+}
+
+.login-intro h1 {
+    font-weight: 800;
+    color: #000;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.login-intro p {
+    font-size: 1.2rem;
+    color: #000000;
+}
+
+/* Error Message Styles */
+.error-message {
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Link Styles */
+a {
+    color: #1483f1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Style for the logout button */
+.logout-btn {
+    background-color: #a51c1c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 20px;
+    align-items: center;
+    
+}
+
+.logout-btn:hover {
+    background-color: #ff1a1a;
+}
+
+/* Style for the dashboard header */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+}
+
+/* Style for each question box */
+.question {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    padding: 20px; /* Add padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-bottom: 20px; /* Add space between questions */
+}
+
+/* Style for the question text */
+.question h3 {
+    margin-top: 0; /* Remove default margin */
+    font-size: 1.2rem; /* Increase font size */
+    color: #333; /* Dark gray text color */
+}
+
+/* Style for the options container */
+.options {
+    margin-top: 10px; /* Add space between the question and options */
+}
+
+/* Style for each option */
+.options div {
+    margin-bottom: 10px; /* Add space between options */
+}
+
+/* Style for the radio buttons and labels */
+.options label {
+    display: flex; /* Align radio button and text */
+    align-items: center; /* Vertically center the radio button and text */
+    font-size: 1rem; /* Set font size */
+    color: #555; /* Medium gray text color */
+}
+
+.options input[type="radio"] {
+    margin-right: 10px; /* Add space between the radio button and text */
+}
+
+/* for take-quiz */
+
+/* Style for the quiz result box */
+#quiz-result {
+    margin-top: 20px; 
+}
+
+.result-box {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    padding: 20px; /* Add padding inside the box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    text-align: center; /* Center the text */
+    max-width: 400px; /* Limit the width of the box */
+    margin: 0 auto; /* Center the box horizontally */
+}
+
+.result-box h3 {
+    margin-top: 0; /* Remove default margin */
+    font-size: 1.5rem; /* Increase font size */
+    color: #333; /* Dark gray text color */
+}
+
+.result-box p {
+    font-size: 1.1rem; /* Set font size */
+    color: #555; /* Medium gray text color */
+    margin: 10px 0; /* Add space between paragraphs */
+}
+
+.result-box span {
+    font-weight: bold; /* Make the score and percentage bold */
+    color: #007BFF; /* Blue color for emphasis */
+}
