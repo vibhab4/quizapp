@@ -2,6 +2,11 @@
 
 This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows users to register, log in, create quizzes, add questions, attempt quizzes, and view their scores. The app also supports public and private quizzes, user authentication, and more.
 
+# Quiz App Demo
+
+Watch the demo video: [Download Demo Video](https://github.com/vibhab4/quizapp/blob/main/quiz_video.mov)
+
+
 ## Features
 - **User Authentication**:
   - Register new users.
