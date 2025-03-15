@@ -6,7 +6,7 @@ This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows u
 
 Watch the demo video:
 
-[![Quiz App Demo]](https://youtu.be/0g4ENn7t2WQ)
+[[Quiz App Demo]](https://youtu.be/0g4ENn7t2WQ)
 
 
 
