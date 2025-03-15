@@ -1,109 +1,145 @@
 # Quiz App API
 
-This is a simple Quiz API built using Flask and SQLAlchemy, allowing users to create quizzes, add questions, and attempt quizzes.
+This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows users to register, log in, create quizzes, add questions, attempt quizzes, and view their scores. The app also supports public and private quizzes, user authentication, and more.
+
+---
 
 ## Features
-- Create and manage users
-- Create quizzes associated with users
-- Add questions to quizzes
-- Retrieve quizzes and questions
-- Attempt quizzes and receive a score
+- **User Authentication**:
+  - Register new users.
+  - Log in and generate API keys for authenticated access.
+  - Log out and invalidate API keys.
+
+- **Quiz Management**:
+  - Create quizzes (public or private).
+  - Add questions to quizzes.
+  - Retrieve quizzes and questions.
+  - Attempt quizzes and receive a score.
+
+- **Public Quizzes**:
+  - Browse and attempt public quizzes created by other users.
+
+- **User Dashboard**:
+  - View quizzes created by the logged-in user.
+  - View quiz attempts and scores.
+
+- **Database Management**:
+  - Reset the database to its initial state.
+
+---
 
 ## Installation
+
 ### Prerequisites
 - Python 3.x
 - Flask
-- Flask-SQLAlchemy (manages the database which is SQLite in this case)
+- Flask-SQLAlchemy
 - SQLite (for local storage)
 - Postman (for API testing)
 
-## Setup Instructions
-
-### Prerequisites
-- Install Python (>=3.8)
-- Install Flask and dependencies
-
-```bash
-pip install flask flask-sqlalchemy
-```
-
-## Running the API
-1. Run the Flask app:
-   ```sh
-   python quiz.py
+### Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
    ```
+
+2. Install dependencies:
+   ```bash
+   pip install flask flask-sqlalchemy
+   ```
+
+3. Run the Flask app:
+   ```bash
+   python app.py
+   ```
+
    The API will be available at `http://127.0.0.1:5000/`.
+
+---
 
 ## API Endpoints
 
-### Users
-- **Create a User**  
-  `POST /user`
+### Authentication
+- **Register a User**  
+  `POST /api/register`
   ```json
   {
-    "name": "Vibha"
+    "username": "vibha",
+    "password": "securepassword123"
   }
   ```
 
-- **Get All Users**  
-  `GET /users`
+- **Log In**  
+  `POST /api/login`
+  ```json
+  {
+    "username": "vibha",
+    "password": "securepassword123"
+  }
+  ```
+
+- **Log Out**  
+  `POST /api/logout`
+
+---
 
 ### Quizzes
 - **Create a Quiz**  
-  `POST /quiz`
+  `POST /api/create-quiz`
   ```json
   {
     "title": "Cloud Computing Quiz",
-    "user_id": 1
+    "is_public": true
   }
   ```
+  **Headers**: `API-Key: <your_api_key>`
 
-- **Get All Quizzes**  
-  `GET /quizzes`
+- **Get All Quizzes (Public)**  
+  `GET /api/public-quizzes`
 
-- **Get a User's Quizzes**  
-  `GET /user/{user_id}/quizzes`
+- **Get Quizzes Created by the User**  
+  `GET /api/quizzes`
+  **Headers**: `API-Key: <your_api_key>`
 
-- **Get a Quiz with its Questions**  
-  `GET /quiz/{quiz_id}`
+- **Get a Quiz with Questions**  
+  `GET /api/quiz/{quiz_id}`
+  **Headers**: `API-Key: <your_api_key>` (required for private quizzes)
 
-- **Update a Quiz Title**  
-  `PUT /quizzes/{quiz_id}`
-  ```json
-  {
-    "title": "Updated Quiz Title"
-  }
-  ```
-
-- **Delete a Quiz**  
-  `DELETE /quiz/{quiz_id}`
+---
 
 ### Questions
 - **Add a Question to a Quiz**  
-  `POST /quiz/{quiz_id}/question`
+  `POST /api/add-question`
   ```json
   {
+    "quiz_id": 1,
     "text": "What is not a programming language?",
     "options": ["C", "C++", "Python", "Snake"],
     "correct_answer": "Snake"
   }
   ```
+  **Headers**: `API-Key: <your_api_key>`
 
-- **Get All Questions in a Quiz**  
-  `GET /quizzes/{quiz_id}/questions`
+---
 
 ### Quiz Attempts
 - **Attempt a Quiz**  
-  `POST /quiz/{quiz_id}/attempt`
+  `POST /api/quiz/{quiz_id}/attempt`
   ```json
   {
     "answers": {"1": "Snake", "2": "Python"}
   }
   ```
+  **Headers**: `API-Key: <your_api_key>`
+
+---
 
 ### Database Management
 - **Reset the Database**  
   `POST /reset-db`
+
+---
 
 ## Testing with Postman
 
@@ -118,4 +154,56 @@ This API was tested using **Postman**. To test it yourself:
 
 Alternatively, you can manually create the requests in Postman using the endpoint details provided above.
 
+---
 
+## Folder Structure
+
+```
+your-repo-name/
+│
+├── static/
+│   ├── style.css            # CSS for the web interface
+│   └── other-assets/        # Other static assets
+│
+├── templates/
+│   ├── dashboard.html       # Dashboard page
+│   ├── take-quiz.html       # Quiz attempt page
+│   ├── register.html        # User registration page
+│   ├── login.html           # User login page
+│   └── index.html           # Home page
+│
+├── app.py                   # Main Flask application
+├── requirements.txt         # Python dependencies
+├── .gitignore               # Files to ignore in Git
+└── README.md                # This file
+```
+
+---
+
+## How to Use
+
+1. **Register a User**:
+   - Use the `/api/register` endpoint to create a new user.
+   - Save the `api_key` returned in the response for authenticated requests.
+
+2. **Log In**:
+   - Use the `/api/login` endpoint to log in and get a new `api_key`.
+
+3. **Create a Quiz**:
+   - Use the `/api/create-quiz` endpoint to create a new quiz.
+   - Set `is_public` to `true` if you want the quiz to be visible to all users.
+
+4. **Add Questions**:
+   - Use the `/api/add-question` endpoint to add questions to a quiz.
+
+5. **Attempt a Quiz**:
+   - Use the `/api/quiz/{quiz_id}/attempt` endpoint to attempt a quiz and receive a score.
+
+6. **View Public Quizzes**:
+   - Use the `/api/public-quizzes` endpoint to browse and attempt public quizzes.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
