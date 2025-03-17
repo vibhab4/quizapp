@@ -167,7 +167,7 @@ your-repo-name/
 │
 ├── static/
 │   ├── style.css            # CSS for the web interface
-│   └── other-assets/        # Other static assets
+│   └── q.jpg        # Image for the Home Page
 │
 ├── templates/
 │   ├── dashboard.html       # Dashboard page
@@ -177,8 +177,6 @@ your-repo-name/
 │   └── index.html           # Home page
 │
 ├── app.py                   # Main Flask application
-├── requirements.txt         # Python dependencies
-├── .gitignore               # Files to ignore in Git
 └── README.md                # This file
 ```
 
