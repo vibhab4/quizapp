@@ -163,7 +163,7 @@ Alternatively, you can manually create the requests in Postman using the endpoin
 ## Folder Structure
 
 ```
-your-repo-name/
+quizapp/
 │
 ├── static/
 │   ├── style.css            # CSS for the web interface
