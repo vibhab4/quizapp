@@ -7,14 +7,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Build Docker image
           command: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+            docker build -t vibhab4/quiz-app:latest .
+            docker tag vibhab4/quiz-app:latest vibhab4/quiz-app:v1.0.0
       - run:
-          name: Run tests
+          name: Push Docker image
           command: |
-            python -m pytest
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker push vibhab4/quiz-app:latest
+            docker push vibhab4/quiz-app:v1.0.0
 
   deploy:
     docker:
@@ -22,18 +24,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install AWS CLI
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y awscli
-      - run:
           name: Deploy to Elastic Beanstalk
           command: |
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set region $AWS_REGION
-            eb init -p docker <your-elastic-beanstalk-app-name> --region $AWS_REGION
-            eb deploy <your-elastic-beanstalk-environment-name>
+            eb init -p docker quiz-app --region $AWS_REGION
+            eb deploy quiz-app-env
 
 workflows:
   build-and-deploy:
