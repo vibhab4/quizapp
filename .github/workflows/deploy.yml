@@ -21,6 +21,14 @@ jobs:
         docker build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/quiz-app:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/quiz-app:latest
 
+    - name: Debug SSH Key
+      run: |
+        echo "Checking if AWS_PRIVATE_KEY is properly stored..."
+        echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+        ssh -i private_key.pem -vvv ec2-user@${{ secrets.AWS_EC2_HOST }} exit
+
+
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@v0.1.4
       with:
