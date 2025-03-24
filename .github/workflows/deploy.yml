@@ -26,6 +26,14 @@ jobs:
         mkdir -p ~/.ssh
         echo -o "StrictHostKeyChecking no" > ~/.ssh/config
 
+    - name: Debug SSH Key
+      run: |
+        echo "Checking if AWS_PRIVATE_KEY is properly stored..."
+        echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+        ssh -i private_key.pem -vvv ec2-user@${{ secrets.AWS_EC2_HOST }} exit
+
+
 
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@v0.1.4
