@@ -1,6 +1,6 @@
 # Quiz App API
 
-This is a **Quiz App API** built using **Flask** and **SQLAlchemy**. It allows users to register, log in, create quizzes, add questions, attempt quizzes, and view their scores. The app also supports public and private quizzes, user authentication, and more.
+This is a **Quiz App API** built using **Flask** and **SQLAlchemy**, deployed on **AWS EC2 using Docker and GitHub Actions CI/CD**.
 
 # Quiz App Demo
 
@@ -31,7 +31,27 @@ Watch the demo video:
 
 - **Database Management**:
   - Reset the database to its initial state.
+  
+- **CI/CD with GitHub Actions**: Automated build, push, and deployment to AWS.  
+- **Dockerized Deployment**: App runs inside a **Docker container** on EC2.  
+- **Secure API & Infrastructure**: Uses **GitHub Secrets, SSH authentication, and AWS Security Groups**. 
 
+## Deployment & CI/CD
+
+This project is **automatically deployed to AWS EC2 using GitHub Actions and Docker**.
+
+### **CI/CD Pipeline Steps**
+1. **GitHub Actions** detects changes pushed to the repository.  
+2. The workflow:
+   - Builds a **Docker image** of the application.  
+   - Pushes the **latest image** to **Docker Hub**.  
+   - Connects to **AWS EC2 via SSH**.  
+   - Pulls the **latest container** and restarts the app.  
+
+3. The app is accessible at:  
+   ```
+   http://<your-ec2-public-ip>
+   ```
 
 ## Installation
 
@@ -41,6 +61,35 @@ Watch the demo video:
 - Flask-SQLAlchemy
 - SQLite (for local storage)
 - Postman (for API testing)
+
+
+## Deployment (Using Docker & AWS)
+To deploy on **AWS EC2**, use Docker.
+
+1. **Build the Docker image:**
+   ```sh
+   docker build -t quiz-app .
+   ```
+2. **Run the container:**
+   ```sh
+   docker run -d -p 5000:5000 quiz-app
+   ```
+3. **Push to Docker Hub:**
+   ```sh
+   docker tag quiz-app your-dockerhub-username/quiz-app:latest
+   docker push your-dockerhub-username/quiz-app:latest
+   ```
+
+---
+
+## Security Implementation
+### **GitHub Secrets**
+- **SSH Private Key (`AWS_PRIVATE_KEY`)**: Used to authenticate with EC2.
+- **EC2 Host (`AWS_EC2_HOST`)**: Stores the EC2 public IP address securely.
+
+### **AWS Security Groups**
+- **Only allows HTTP (port 80) & SSH (port 22) access**.
+- **SSH restricted to GitHub Actions IP (for security).**
 
 ### Setup Instructions
 1. Clone the repository:
@@ -59,7 +108,7 @@ Watch the demo video:
    python app.py
    ```
 
-   The API will be available at `http://127.0.0.1:5000/`.
+   The API will be available at `http://<your-ec2-public-ip>/`.
 
 
 ## API Endpoints
@@ -152,33 +201,11 @@ This API was tested using **Postman**. To test it yourself:
 2. Click **Import**, then select **Raw text**.
 3. Paste the following URL and import it:
    ```
-   http://127.0.0.1:5000/
+   http://<your-ec2-public-ip>/
    ```
 4. Run the requests and check the responses.
 
 Alternatively, you can manually create the requests in Postman using the endpoint details provided above.
-
----
-
-## Folder Structure
-
-```
-quizapp/
-│
-├── static/
-│   ├── style.css            # CSS for the web interface
-│   └── q.jpg        # Image for the Home Page
-│
-├── templates/
-│   ├── dashboard.html       # Dashboard page
-│   ├── take-quiz.html       # Quiz attempt page
-│   ├── register.html        # User registration page
-│   ├── login.html           # User login page
-│   └── index.html           # Home page
-│
-├── app.py                   # Main Flask application
-└── README.md                # This file
-```
 
 ---
 
@@ -206,6 +233,21 @@ quizapp/
 
 ---
 
+---
+
+## Software Stack Used
+- **Backend**: Python (Flask, SQLAlchemy)
+- **Database**: SQLite (for local testing)
+- **Containerization**: Docker
+- **CI/CD**: GitHub Actions
+- **Hosting**: AWS EC2
+- **Security**: SSH, GitHub Secrets, AWS Security Groups
+
+---
+
 ## License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+
+
