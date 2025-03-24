@@ -24,7 +24,9 @@ jobs:
     - name: Add EC2 to known hosts
       run: |
         mkdir -p ~/.ssh
-        echo -o "StrictHostKeyChecking no" > ~/.ssh/config
+        echo "StrictHostKeyChecking no" > ~/.ssh/config
+        chmod 600 ~/.ssh/config
+
 
     - name: Debug SSH Key
       run: |
