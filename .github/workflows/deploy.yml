@@ -3,7 +3,7 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - main  # Runs the workflow when code is pushed to the main branch
+      - main
 
 jobs:
   deploy:
@@ -31,10 +31,12 @@ jobs:
 
       - name: Debug SSH Key
         run: |
-          echo "Checking if AWS_PRIVATE_KEY is properly stored..."
+          echo "Private key:"
+          echo "${{ secrets.AWS_PRIVATE_KEY }}"
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
           ls -l private_key.pem
+          cat private_key.pem
           ssh -i private_key.pem -vvv ec2-user@${{ secrets.AWS_EC2_HOST }} exit
 
       - name: Deploy to AWS EC2
