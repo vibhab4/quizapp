@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "Private key:"
           echo "${{ secrets.AWS_PRIVATE_KEY }}"
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key.pem
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" | tr -d '\r' > private_key.pem
           chmod 600 private_key.pem
           ls -l private_key.pem
           cat private_key.pem
