@@ -41,12 +41,25 @@ class QuizAttempt(db.Model):
     completed = db.Column(db.Boolean, default=False)
 
 # Helper function to authenticate users
+# def authenticate(api_key):
+#     users = User.query.all()
+#     for user in users:
+#         if check_password_hash(user.api_key_hash, api_key):
+#             return user
+#     return None
+
 def authenticate(api_key):
+    if not api_key:
+        return None
+
     users = User.query.all()
     for user in users:
-        if check_password_hash(user.api_key_hash, api_key):
+        if user.api_key_hash and check_password_hash(user.api_key_hash, api_key):
             return user
+
     return None
+
+
 
 # Routes for API
 @app.route('/api/register', methods=['POST'])
